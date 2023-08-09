@@ -1,7 +1,7 @@
 package com.example.justlee;
 
 import com.example.justlee.repositoryImp.EmployeeRepositoryImp;
-import com.example.justlee.entity.Employee;
+import com.example.justlee.entity.EmployeeEntity;
 import com.example.justlee.service.EmployeeService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class TodoServiceTest {
 
     @Test
     public void TestNotNull() {
-        Assert.assertEquals(null, service.addEmployee(new Employee()));
+        Assert.assertEquals(null, service.addEmployee(new EmployeeEntity()));
         Assert.assertEquals(repository.findAll().size(), 0);
         Assert.assertEquals(new BigDecimal(3),  new BigDecimal(3).multiply(new BigDecimal(1)));
     }
