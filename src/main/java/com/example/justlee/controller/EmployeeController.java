@@ -1,6 +1,6 @@
 package com.example.justlee.controller;
 
-import com.example.justlee.entity.Employee;
+import com.example.justlee.entity.EmployeeEntity;
 import com.example.justlee.entity.Gender;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,7 +24,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "404", description = "Not found - The employee was not found")
     })
     @GetMapping("employees")
-    public List<Employee> getAllEmployees(){
+    public List<EmployeeEntity> getAllEmployees(){
         return employeeService.getAllEmployees();
     }
     @Operation(summary = "Update employee's info by id", description = "Return employee's new info")
@@ -33,7 +33,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "404", description = "Not found - The employee was not found")
     })
     @PutMapping("employee")
-    public Employee updateEmployee(@RequestBody Employee employee){
+    public EmployeeEntity updateEmployee(@RequestBody EmployeeEntity employee){
         return employeeService.updateEmployee(employee);
     }
     @Operation(summary = "Get an employee by name", description = "Returns list of employees săm with input name")
@@ -42,7 +42,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "404", description = "Not found - The employee was not found")
     })
     @GetMapping("employee/get")
-    public List<Employee> getEmployeeByName(@RequestParam String name){
+    public List<EmployeeEntity> getEmployeeByName(@RequestParam String name){
         return employeeService.getEmployeesByName(name);
     }
     @Operation(summary = "Get an employee by id", description = "Returns an employee as per the id")
@@ -51,7 +51,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "404", description = "Not found - The employee was not found")
     })
     @GetMapping("employee/{id}")
-    public Employee getEmployeeByID(@PathVariable Long id){
+    public EmployeeEntity getEmployeeByID(@PathVariable Long id){
         return employeeService.getEmployeesByID(id);
     }
     @Operation(summary = "Get list of employee filter by gender", description = "Returns a list of employees")
@@ -60,7 +60,7 @@ public class EmployeeController {
             @ApiResponse(responseCode = "404", description = "Not found - The employee was not found")
     })
     @GetMapping("employee/gender/get")
-    public List<Employee> getEmployeeByGender(@RequestParam Gender gender){
+    public List<EmployeeEntity> getEmployeeByGender(@RequestParam Gender gender){
         return employeeService.getEmployeeByGender(gender);
     }
     @Operation(summary = "Add a new employee", description = "Returns the employee's info")
@@ -70,7 +70,7 @@ public class EmployeeController {
     })
 
     @PostMapping(value = "employee", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Employee addNewEmployee(@RequestBody Employee employee){
+    public EmployeeEntity addNewEmployee(@RequestBody EmployeeEntity employee){
         return employeeService.addEmployee(employee);
     }
     @Operation(summary = "Delete an employee by id", description = "No return in response")

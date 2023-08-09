@@ -14,7 +14,7 @@ public class SecurityConfiguration {
                 .permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/customers/**")
+                .antMatchers("/company/**")
                 .hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()

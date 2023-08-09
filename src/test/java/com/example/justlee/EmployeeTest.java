@@ -1,8 +1,8 @@
 package com.example.justlee;
 
 import com.example.justlee.controller.EmployeeController;
-import com.example.justlee.entity.Company;
-import com.example.justlee.entity.Employee;
+import com.example.justlee.entity.CompanyEntity;
+import com.example.justlee.entity.EmployeeEntity;
 import com.example.justlee.entity.EmployeeDTO;
 import com.example.justlee.entity.Gender;
 import com.example.justlee.service.EmployeeService;
@@ -41,14 +41,14 @@ public class EmployeeTest {
 
     @Before
     public void setup(){
-        Company companyA = new Company(1L, "SaolaSoft", "72 Tran Dang Ninh", 1975);
-        Company companyB = new Company(2L, "BitScreener Soft", "1 Pham Van bach", 2001);
-        Company companyC = new Company(3L, "Tell Me Why", "37 Cau Giay", 1886);
+        CompanyEntity companyEntityA = new CompanyEntity(1L, "SaolaSoft", "72 Tran Dang Ninh", 1975);
+        CompanyEntity companyEntityB = new CompanyEntity(2L, "BitScreener Soft", "1 Pham Van bach", 2001);
+        CompanyEntity companyEntityC = new CompanyEntity(3L, "Tell Me Why", "37 Cau Giay", 1886);
 
-        List<Employee> employees = Arrays.asList(
-                new Employee(1L, "Hari Won", Gender.Male, "Singapore", LocalDate.now(), companyA),
-                new Employee(2L, "Hari Billiard", Gender.Other, "HongKong", LocalDate.now(), companyB),
-                new Employee(3L, "Kalte", Gender.Female, "Thailands", LocalDate.now(), companyA));
+        List<EmployeeEntity> employees = Arrays.asList(
+                new EmployeeEntity(1L, "Hari Won", Gender.Male, "Singapore", LocalDate.now(), companyEntityA),
+                new EmployeeEntity(2L, "Hari Billiard", Gender.Other, "HongKong", LocalDate.now(), companyEntityB),
+                new EmployeeEntity(3L, "Kalte", Gender.Female, "Thailands", LocalDate.now(), companyEntityA));
         Mockito.when(employeeService.getEmployeesByName(anyString())).thenReturn(employees);
         Mockito.when(employeeService.getAllEmployees()).thenReturn(employees);
         Mockito.when(employeeService.getEmployeesByID(anyLong())).thenReturn(employees.stream().findFirst().get());
@@ -57,7 +57,7 @@ public class EmployeeTest {
     @Test
     public void whenValidId_thenReturn(){
         String name = "Lee";
-        List<Employee> employees = employeeService.getEmployeesByName(name);
+        List<EmployeeEntity> employees = employeeService.getEmployeesByName(name);
         Assert.assertTrue(!employees.stream()
                 .filter(emp -> emp.getFullname().contains(name))
                 .findFirst()
@@ -112,16 +112,16 @@ public class EmployeeTest {
     @Test
     public void testModelMapper(){
         final ModelMapper mapper = new ModelMapper();
-        Company companyA = new Company(1L,
+        CompanyEntity companyEntityA = new CompanyEntity(1L,
                 "SaolaSoft",
                 "72 Tran Dang Ninh",
                 1975);
-        Employee employee =  new Employee(1L,
+        EmployeeEntity employee =  new EmployeeEntity(1L,
                 "Hari Won",
                 Gender.Male,
                 "Singapore",
                 LocalDate.of(1998, Month.APRIL, 15),
-                companyA);
+                companyEntityA);
         EmployeeDTO employeeDTO = mapper.map(employee, EmployeeDTO.class);
         System.out.println(employeeDTO);
         System.out.println(employee);

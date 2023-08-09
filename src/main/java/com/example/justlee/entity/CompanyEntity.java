@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "companies")
-public class Company {
+public class CompanyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "companyID", updatable = false, nullable = false)
@@ -22,13 +22,13 @@ public class Company {
     private int since;
     @JsonIgnore
     @ToString.Exclude
-    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
-    private List<Employee> employees;
+    @OneToMany(mappedBy = "companyEntity", fetch = FetchType.EAGER)
+    private List<EmployeeEntity> employees;
 
-    public Company() {
+    public CompanyEntity() {
     }
 
-    public Company(Long companyID, String name, String address, int since) {
+    public CompanyEntity(Long companyID, String name, String address, int since) {
         this.companyID = companyID;
         this.name = name;
         this.address = address;
@@ -67,11 +67,11 @@ public class Company {
         this.since = since;
     }
 
-    public List<Employee> getEmployees() {
+    public List<EmployeeEntity> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
+    public void setEmployees(List<EmployeeEntity> employees) {
         this.employees = employees;
     }
 }

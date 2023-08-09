@@ -8,7 +8,7 @@ import java.time.Period;
 
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
@@ -24,20 +24,20 @@ public class Employee {
     private LocalDate dob;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "companyID")
-    private Company company;
+    private CompanyEntity companyEntity;
     @Transient
     private Integer age;
 
-    public Employee() {
+    public EmployeeEntity() {
     }
 
-    public Employee(Long id, String fullname, Gender gender, String hometown, LocalDate dob, Company company) {
+    public EmployeeEntity(Long id, String fullname, Gender gender, String hometown, LocalDate dob, CompanyEntity companyEntity) {
         this.employeeID = id;
         this.fullname = fullname;
         this.gender = gender;
         this.hometown = hometown;
         this.dob = dob;
-        this.company = company;
+        this.companyEntity = companyEntity;
         this.age = Period.between(dob, LocalDate.now()).getYears();
     }
 
@@ -89,12 +89,12 @@ public class Employee {
         this.age = Period.between(this.dob, LocalDate.now()).getYears();
     }
 
-    public Company getCompany() {
-        return company;
+    public CompanyEntity getCompany() {
+        return companyEntity;
     }
 
-    public void setCompany(Company company) {
-        this.company = company;
+    public void setCompany(CompanyEntity companyEntity) {
+        this.companyEntity = companyEntity;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Employee {
                 ", gender=" + gender +
                 ", hometown='" + hometown + '\'' +
                 ", dob=" + dob +
-                ", company=" + company +
+                ", company=" + companyEntity +
                 ", age=" + age +
                 '}';
     }
